@@ -18,6 +18,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import React from 'react'
 import Logo from '../reusables/Logo'
+import Balance from './Balance'
 
 const drawerWidth = 240
 const AppBar = styled(MuiAppBar, {
@@ -173,16 +174,7 @@ const NavBar = ({ open, handleDrawerOpen, navigateHome }) => {
           {/* accounts section */}
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size='large' aria-label='show 4 new mails'>
-              <Badge badgeContent={4} color='error'>
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton size='large' aria-label='show 17 new notifications'>
-              <Badge badgeContent={17} color='error'>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Balance />
             <IconButton
               size='large'
               edge='end'
@@ -191,6 +183,7 @@ const NavBar = ({ open, handleDrawerOpen, navigateHome }) => {
               aria-haspopup='true'
               onClick={handleProfileMenuOpen}
               color=''
+              className='flex-grow'
             >
               <AccountCircle />
             </IconButton>

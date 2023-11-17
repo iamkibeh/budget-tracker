@@ -23,3 +23,10 @@ body {
   
 }
 
+.btn {
+  @apply bg-green-500 text-white rounded-sm px-2 py-1 cursor-pointer hover:bg-green-600; 
+}
+
+.css-houc2y-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+  height: 40px;
+}

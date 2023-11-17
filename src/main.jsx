@@ -34,23 +34,28 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
+            height: '40px',
             '&.Mui-focused fieldset': {
-              borderColor: '#957FF6',
+              borderColor: '#2c3e50',
             },
             '&:hover fieldset': {
-              borderColor: '#957FF6',
+              borderColor: '#2c3e50',
               borderWidth: '1px',
             },
             '& fieldset:focus': {
-              // borderColor: '#957FF6',
+              // borderColor: '#2c3e50',
             },
             '&.Mui-focused .MuiInputLabel-outlined': {
-              color: '#957FF6',
+              color: '#2c3e50',
             },
+            '& .MuiSelect-root': {
+              height: '40px',
+            }
           },
           '& .MuiInputLabel-outlined.Mui-focused': {
-            color: '#957FF6',
-            borderBottomColor: '#957FF6',
+            height: '40px',
+            color: '#2c3e50',
+            borderBottomColor: '#2c3e50',
           },
           '& .MuiInputLabel-filled': {
             color: 'gray',
@@ -60,8 +65,17 @@ const theme = createTheme({
             borderBottomColor: 'transparent',
           },
           '& .MuiFilledInput-root:after': {
-            borderColor: '#957FF6',
+            borderColor: '#2c3e50',
           },
+
+          '& .MuiInputLabel-outlined': {
+            transform: 'translate(14px, 10px) scale(1)',
+          },
+          '& .MuiInputLabel-outlined.MuiInputLabel-shrink': {
+            transform: 'translate(14px, -6px) scale(0.75)',
+          },
+
+
         },
       },
     },
