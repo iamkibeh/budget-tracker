@@ -76,6 +76,8 @@ const AddTransactionModal = ({ open, setOpen }) => {
                       label='Amount'
                       variant='outlined'
                       fullWidth
+                      type='number'
+                      
                       className='flex-[2]'
                       {...field}
                       error={Boolean(errors.amount)}
