@@ -2,6 +2,8 @@ import styled from '@emotion/styled'
 import { Divider } from '@mui/material'
 import PropTypes from 'prop-types'
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
+import expenseIcon from '/expense-clip-art.png'
+import incomeIcon from '/income-clip-art.jpg'
 
 const ListItem = styled.li`
   display: flex;
@@ -34,14 +36,16 @@ const TransactionDate = styled.span`
 `
 
 const TransactionListItem = ({ transaction }) => {
-  const { description, amount, type, date, icon, receiver } = transaction
+  const { description, amount, type, date } = transaction
 
   return (
     <>
       <ListItem type={type}>
-        <img src={icon} alt={description} className='w-8 h-8' />
+        <img src={
+          type === 'income' ? incomeIcon : expenseIcon
+        } alt={description} className='w-8 h-8' />
         <TransactionInfo>
-          <span>{receiver}</span>
+          <span>{description}</span>
           <TransactionDate>
             {new Date(date).toLocaleDateString()}
           </TransactionDate>
@@ -63,7 +67,7 @@ TransactionListItem.propTypes = {
     type: PropTypes.oneOf(['income', 'expense']).isRequired,
     date: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
-    receiver: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
   }).isRequired,
 }
 

@@ -4,7 +4,8 @@ import { Backdrop, Fade, Modal, TextField } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { PencilSquareIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import DeleteConfirmationModal from './DeleteConfirmationModal'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { TransactionContext } from '../../ContextProvider'
 
 const ViewTransactionModal = ({
   transaction,
@@ -12,6 +13,8 @@ const ViewTransactionModal = ({
   viewTransactionModal,
 }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const { deleteTransaction, editTransaction } = useContext(TransactionContext)
+ 
 
   const handleCloseDeleteModal = () => {
     setDeleteModalOpen(false)
@@ -19,7 +22,14 @@ const ViewTransactionModal = ({
 
   const handleDeleteTransaction = () => {
     // delete transaction here
+    deleteTransaction(transaction.id)
     setDeleteModalOpen(false)
+    setViewTransactionModal(false)
+  }
+
+  const handleEditTransaction = () => {
+    editTransaction(transaction.id, transaction)
+    setViewTransactionModal(false)
   }
   return (
     <>
@@ -102,7 +112,7 @@ const ViewTransactionModal = ({
               <StyledButton
                 type='button'
                 className='btn btn-primary'
-                onClick={() => {}}
+                onClick={handleEditTransaction}
               >
                 <PencilSquareIcon className='w-4 h-4 mr-2' />
                 Save Changes

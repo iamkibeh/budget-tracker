@@ -9,7 +9,7 @@ const Analytics = ({ title, amount, percentage, isLoss, color, extra, extraMessa
       <Card
         sx={{ p: 2.5, bgcolor: 'background.neutral' }}
         elevation={0}
-        className=' border-opacity-20 border-gray-700 rounded-md border bg-secondary-color'
+        className=' border-opacity-20 border-gray-700 rounded-md border bg-secondary-color min-h-[150px]'
       >
         <Stack spacing={0.5}>
           <Typography variant='h6' color='textSecondary' className='text-sm'>
@@ -53,6 +53,8 @@ const Analytics = ({ title, amount, percentage, isLoss, color, extra, extraMessa
             )}
           </Grid>
         </Stack>
+        {
+          extraMessage &&
         <Box sx={{ pt: 2.25 }} className='-mt-2'>
           {!isLoss ? (
             <Typography variant='caption' color='textSecondary'>
@@ -80,6 +82,7 @@ const Analytics = ({ title, amount, percentage, isLoss, color, extra, extraMessa
             </Typography>
           )}
         </Box>
+        }
       </Card>
     </div>
   )

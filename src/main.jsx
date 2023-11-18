@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material'
 import { BrowserRouter } from 'react-router-dom'
+import { ContextProvider } from './components/ContextProvider.jsx'
 
 const rootElement = document.getElementById('root')
 const root = ReactDOM.createRoot(rootElement)
@@ -99,12 +100,14 @@ const theme = createTheme({
 
 root.render(
   <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <ContextProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </ContextProvider>
   </React.StrictMode>
 )

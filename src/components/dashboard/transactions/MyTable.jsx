@@ -1,28 +1,23 @@
-import { myTransactions } from '../../../utils/myTransactions'
 import Table from '../../reusables/table'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import ViewTransactionModal from './ViewTransactionModal'
 import AddTransactionModal from './AddTransactionModal'
-
+import { TransactionContext } from '../../ContextProvider'
 
 const MyTable = () => {
-  const [transactions, setTransactions] = useState([])
   const [loading, setLoading] = useState(true)
   const [viewTransactionModal, setViewTransactionModal] = useState(false)
   const [selectedTransaction, setSelectedTransaction] = useState(null)
   const [addTransactionModal, setAddTransactionModal] = useState(false)
+  // get transactions from the context
+  const { transactions } = useContext(TransactionContext)
 
   useEffect(() => {
-    const fetchTransactions = async () => {
-      setTimeout(() => {}, 3000)
-      setTransactions(myTransactions)
-      setLoading(false)
-    }
-    fetchTransactions()
+    setTimeout(() => {}, 2500)
+    setLoading(false)
   }, [])
 
   const handleRowClick = (transaction) => {
-    console.log({ transaction })
     setSelectedTransaction(transaction)
     setViewTransactionModal(true)
   }
@@ -36,9 +31,9 @@ const MyTable = () => {
           { selector: 'description', name: ' Name (description)' },
           { selector: 'category', name: 'Category' },
           { selector: 'amount', name: 'Amount' },
-          { selector: 'type', name: 'Type'}
+          { selector: 'type', name: 'Type' },
         ]}
-        data={transactions}
+        data={transactions.sort((a, b) => new Date(b.date) - new Date(a.date))}
         emptyMessage='No transactions found'
         showSearch
         // onSearch={(value) => console.log(value)}
@@ -53,8 +48,15 @@ const MyTable = () => {
         loading={loading}
       ></Table>
 
-        <ViewTransactionModal setViewTransactionModal={setViewTransactionModal} transaction={selectedTransaction} viewTransactionModal={viewTransactionModal}  /> 
-      <AddTransactionModal open={addTransactionModal} setOpen={setAddTransactionModal}/>
+      <ViewTransactionModal
+        setViewTransactionModal={setViewTransactionModal}
+        transaction={selectedTransaction}
+        viewTransactionModal={viewTransactionModal}
+      />
+      <AddTransactionModal
+        open={addTransactionModal}
+        setOpen={setAddTransactionModal}
+      />
     </>
   )
 }

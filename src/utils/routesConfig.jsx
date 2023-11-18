@@ -1,5 +1,6 @@
 import Layout from '../components/Layout'
 import DashboardHomePage from '../components/dashboard/DashboardHomePage'
+import Reports from '../components/dashboard/reports'
 import Transactions from '../components/dashboard/transactions'
 
 export const routesConfig = [
@@ -10,7 +11,7 @@ export const routesConfig = [
       { path: '/', element: <DashboardHomePage /> },
       {
         path: '/reports',
-        element: <h1>Reports</h1>,
+        element: <Reports />,
       },
       {
         path: '/transactions',

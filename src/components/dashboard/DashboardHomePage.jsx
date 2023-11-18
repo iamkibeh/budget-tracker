@@ -1,13 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import Chart from 'chart.js/auto'
 import { Divider, Grid, Paper } from '@mui/material'
 import styled from '@emotion/styled'
-import { analyticInfo } from '../../utils/analytics'
 import Analytics from '../reusables/Analytics'
 import TransactionHistory from './TransactionHistory'
+import { TransactionContext } from '../ContextProvider'
 
 const DashboardHomePage = () => {
   const chartRef = useRef(null)
+  const {analytics} = useContext(TransactionContext)
 
   const ParentDiv = styled.div`
     flexgrow: 1;
@@ -18,12 +19,8 @@ const DashboardHomePage = () => {
     color: theme.palette.text.secondary,
     width: '50%'
     `
-  const ChartContainer = styled.div`
-    position: 'relative',
-    height: '20vh',
-    maxWidth: '35vw',
-    margin: '0 auto',
-    `
+
+
 
   React.useEffect(() => {
     if (chartRef.current) {
@@ -64,7 +61,7 @@ const DashboardHomePage = () => {
             beginAtZero: true,
           },
         },
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       },
     })
 
@@ -75,12 +72,13 @@ const DashboardHomePage = () => {
     }
   }, [])
 
+
   return (
-    <ParentDiv className={'flex gap-4'}>
+    <ParentDiv className={'flex gap-4 flex-col lg:flex-row '}>
       <div className='flex-grow'>
         {/* analytics info */}
         <Grid container spacing={3}>
-          {analyticInfo.map((item, index) => (
+          {analytics.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Analytics
                 title={item.title}
@@ -99,14 +97,14 @@ const DashboardHomePage = () => {
         <h2 className='text-xl font-bold mb-4'>Expenses vs Income</h2>
         <Grid item xs={12}>
           <MyPaper className={'bg-white'}>
-            <ChartContainer>
+            <div className='relative w-[40vw] h-[40vh]'>
               <canvas id='myChart'></canvas>
-            </ChartContainer>
+            </div>
           </MyPaper>
         </Grid>
       </div>
 
-      <div className="bg-secondary-color p-2 w-[300px]">
+      <div className='bg-secondary-color p-2 w-[300px]'>
         <TransactionHistory />
       </div>
     </ParentDiv>

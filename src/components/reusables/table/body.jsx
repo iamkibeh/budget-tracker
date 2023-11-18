@@ -35,7 +35,7 @@ const TableBody = ({ cols, rows, rowsPerPage, page, onRowClicked }) => {
             return (
               <tr key={rIndex}
             //   style based on category, if not income should be red
-                className={item.category !== 'Income' ? 'text-red-500' : ''}
+                className={item.type !== 'income' ? 'text-red-500' : ''}
               >
                 {cols.map((column, cIndex) => (
                   <td

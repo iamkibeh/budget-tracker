@@ -1,7 +1,7 @@
 import HomeIcon from '@mui/icons-material/Home'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import AssignmentIcon from '@mui/icons-material/Assignment'
+import { PaidOutlined } from '@mui/icons-material'
 
 
 export const navMenus = [
@@ -12,7 +12,7 @@ export const navMenus = [
   },
   {
     text: 'Transactions',
-    icon: <ShoppingCartIcon />,
+    icon: <PaidOutlined />,
     path: '/transactions',
   },
   {

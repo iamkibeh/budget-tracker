@@ -9,7 +9,8 @@ import {
   DialogTitle,
 } from '@mui/material'
 import styled from '@emotion/styled'
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const MyButton = styled(Button)`
   color: white;
@@ -48,27 +49,35 @@ const DeleteConfirmationModal = ({ open, onClose, onDelete }) => {
     setLoading(true)
     await onDelete()
     setLoading(false)
+    toast.success('Transaction deleted successfully')
     onClose()
   }
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Delete Transaction</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Are you sure you want to delete this transaction?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <MyButton onClick={onClose} disabled={loading} >
-          Cancel
-        </MyButton>
-       
-        <MyButton onClick={handleDelete} disabled={loading} className='delete-btn'>
-          {loading ? 'Deleting...' : 'Delete'}
-        </MyButton>
-      </DialogActions>
-    </Dialog>
+    <>
+      <ToastContainer />
+      <Dialog open={open} onClose={onClose}>
+        <DialogTitle>Delete Transaction</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this transaction?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <MyButton onClick={onClose} disabled={loading}>
+            Cancel
+          </MyButton>
+
+          <MyButton
+            onClick={handleDelete}
+            disabled={loading}
+            className='delete-btn'
+          >
+            {loading ? 'Deleting...' : 'Delete'}
+          </MyButton>
+        </DialogActions>
+      </Dialog>
+    </>
   )
 }
 

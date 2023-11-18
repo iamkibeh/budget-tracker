@@ -143,6 +143,7 @@ const SideBar = ({
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                disabled={true}
               >
                 <ListItemIcon
                   sx={{
