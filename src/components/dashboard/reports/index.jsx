@@ -13,10 +13,10 @@ const Reports = () => {
   const incomeAndExpensesByMonthRef = useRef(null)
 
   // Initialize an object to hold the totals for each month
-  const totalsByMonth = {
-    
+  const totalsByMonth = {}
+  for (let i = 0; i < 12; i++) {
+    totalsByMonth[i] = { income: 0, expense: 0 }
   }
-
   // Process each transaction
   myTransactions.forEach((transaction) => {
     // Extract the month from the date
@@ -27,14 +27,13 @@ const Reports = () => {
     }
 
     // Update the totals for this month
-    if (transaction.type === 'Income') {
+    if (transaction.type === 'income') {
       totalsByMonth[month].income += transaction.amount
-    } else if (transaction.type === 'Expense') {
+    } else if (transaction.type === 'expense') {
       totalsByMonth[month].expense += Math.abs(transaction.amount) // Use Math.abs to convert the amount to a positive number
     }
   })
 
-  
   useEffect(() => {
     const fetchData = async () => {
       // const result = await axios.get('/api/expenses');
@@ -85,7 +84,9 @@ const Reports = () => {
 
       // Income and expenses by month
       const incomeAndExpensesByMonthData = {
-        labels: Object.keys(totalsByMonth).map((month) => new Date(2023, month).toLocaleString('default', { month: 'long' })),
+        labels: Object.keys(totalsByMonth).map((month) =>
+          new Date(2023, month).toLocaleString('default', { month: 'long' })
+        ),
         datasets: [
           {
             label: 'Income',
@@ -204,14 +205,14 @@ const Reports = () => {
           <canvas id='expensesOverTime'></canvas>
         </div>
         <div className='flex flex-col items-center justify-center'>
-          <h2 className='text-xl font-bold'>Expenses by category</h2>
-          {/* <Pie data={expensesByCategory} /> */}
-          <canvas id='expensesByCategory'></canvas>
-        </div>
-        <div className='flex flex-col items-center justify-center'>
           <h2 className='text-xl font-bold'>Income and expenses by month</h2>
           {/* <Bar data={incomeAndExpensesByMonth} /> */}
           <canvas id='incomeAndExpensesByMonth'></canvas>
+        </div>
+        <div className='flex flex-col items-center justify-center'>
+          <h2 className='text-xl font-bold'>Expenses by category</h2>
+          {/* <Pie data={expensesByCategory} /> */}
+          <canvas id='expensesByCategory'></canvas>
         </div>
       </div>
     </div>

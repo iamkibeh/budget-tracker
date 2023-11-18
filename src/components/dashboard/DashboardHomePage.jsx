@@ -8,7 +8,7 @@ import { TransactionContext } from '../ContextProvider'
 
 const DashboardHomePage = () => {
   const chartRef = useRef(null)
-  const {analytics} = useContext(TransactionContext)
+  const {analytics, transactions} = useContext(TransactionContext)
 
   const ParentDiv = styled.div`
     flexgrow: 1;
@@ -39,17 +39,22 @@ const DashboardHomePage = () => {
           'May',
           'June',
           'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
         ],
         datasets: [
           {
             label: 'Expenses',
-            data: [12, 19, 3, 5, 2, 3, 10],
+            data: transactions.filter((transaction) => transaction.type === 'expense').map((transaction) =>Math.abs(transaction.amount)),
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
           },
           {
             label: 'Income',
-            data: [5, 10, 15, 20, 25, 30, 35],
+            data: transactions.filter((transaction) => transaction.type === 'income').map((transaction) => Math.abs(transaction.amount)),
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
