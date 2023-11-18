@@ -32,11 +32,16 @@ const AddTransactionModal = ({ open, setOpen }) => {
 
 
   const onSubmit = (data) => {
+    if (data.type === 'expense') {
+      data.amount = -Math.abs(data.amount)
+    }
+
     const myFormData = {
       ...data,
       id: transactions.length + 1,
       date: new Date().toISOString().slice(0, 10),
     }
+
 
     addTransaction(myFormData)
     toast.success('Transaction added successfully')
@@ -77,7 +82,7 @@ const AddTransactionModal = ({ open, setOpen }) => {
                       variant='outlined'
                       fullWidth
                       type='number'
-                      
+
                       className='flex-[2]'
                       {...field}
                       error={Boolean(errors.amount)}

@@ -22,6 +22,7 @@ const MyTable = () => {
     setViewTransactionModal(true)
   }
 
+  console.log(transactions.sort((a, b) => new Date(b.date) - new Date(a.date)))
   return (
     <>
       <Table
